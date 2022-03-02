@@ -4,10 +4,7 @@
 #define MAX_LENGTH 10
 
 int decimalToBinary (int decimalNumber);
-
-struct set {
-  int Array[MAX_LENGTH];
-};
+void print (int Array[], int length);
 
 int main (void) {
   int setOfDecimalNumbers[MAX_LENGTH];
@@ -19,6 +16,9 @@ int main (void) {
 
   for (int i = 0; i != MAX_LENGTH; ++i)
     setOfBinaryNumbers[i] = decimalToBinary(setOfDecimalNumbers[i]);
+  
+  print(setOfDecimalNumbers, MAX_LENGTH);
+  print(setOfBinaryNumbers, MAX_LENGTH);
   
   return 0;
 }
