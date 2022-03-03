@@ -13,7 +13,7 @@ int main (void) {
   printf("Сколько чисел вы хотите ввести?\n>> ");
   scanf("%d", &countOfNumbers);
   
-  for (int i = 0; i != MAX_LENGTH; ++i)
+  for (int i = 0; i != countOfNumbers; ++i)
     setOfDecimalNumbers[i] = i;
   
   int setOfBinaryNumbers[MAX_LENGTH];
