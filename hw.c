@@ -1,13 +1,17 @@
 #include <stdio.h>
 #include <math.h>
 
-#define MAX_LENGTH 10
+#define MAX_LENGTH 100
 
 int decimalToBinary (int decimalNumber);
 void print (int Array[], int length);
 
 int main (void) {
   int setOfDecimalNumbers[MAX_LENGTH];
+  
+  int countOfNumbers = 0;
+  printf("Сколько чисел вы хотите ввести?\n>> ");
+  scanf("%d", &countOfNumbers);
   
   for (int i = 0; i != MAX_LENGTH; ++i)
     setOfDecimalNumbers[i] = i;
@@ -17,8 +21,8 @@ int main (void) {
   for (int i = 0; i != MAX_LENGTH; ++i)
     setOfBinaryNumbers[i] = decimalToBinary(setOfDecimalNumbers[i]);
   
-  print(setOfDecimalNumbers, MAX_LENGTH);
-  print(setOfBinaryNumbers, MAX_LENGTH);
+  print(setOfDecimalNumbers, countOfNumbers);
+  print(setOfBinaryNumbers, countOfNumbers);
   
   return 0;
 }
