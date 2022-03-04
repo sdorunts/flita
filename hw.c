@@ -18,7 +18,7 @@ int main (void) {
   
   int setOfBinaryNumbers[MAX_LENGTH];
 
-  for (int i = 0; i != MAX_LENGTH; ++i)
+  for (int i = 0; i != countOfNumbers; ++i)
     setOfBinaryNumbers[i] = decimalToBinary(setOfDecimalNumbers[i]);
   
   print(setOfDecimalNumbers, countOfNumbers);
