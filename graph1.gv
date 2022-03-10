@@ -1,0 +1,1 @@
+graph G {A -- B; C; J; H -- J; A -- B; C; J; E -- H; J; A -- D; E; F; A -- D; E; H; E -- A -- D; E; J; A -- B; I; G -- I; A -- B; I; D -- G; I; C -- D; E; }
