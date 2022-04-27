@@ -28,6 +28,7 @@ int main(void) {
 	size_t max_vertex_count = 1;
 	size_t current_vertex_count = 0;
 	char c;
+	int flag = 1;
 
    	file_with_matrix = fopen("matrix.txt", "r");
 	if (file_with_matrix == NULL) {
@@ -41,17 +42,20 @@ int main(void) {
 		return 1;
 	}
 
-	/* {vertex_number, vertex_degree_count} */
-	current_vertex_degree = (size_t *) malloc(2 * sizeof(size_t));
-	if (current_vertex_degree == NULL) {
-		printf("Allocation error.\n");
-		return 1;
-	}
-	current_vertex_degree[0] = current_vertex_count + 1;
-
 	while ((c = fgetc(file_with_matrix)) != EOF) {
 		if (c == ' ')
 			continue;
+
+		if (flag) {
+			/* {vertex_number, vertex_degree_count} */
+			current_vertex_degree = (size_t *) malloc(2 * sizeof(size_t));
+			if (current_vertex_degree == NULL) {
+				printf("Allocation error.\n");
+				return 1;
+			}
+			current_vertex_degree[0] = current_vertex_count + 1;
+			flag = 0;
+		}
 
 		if (c == '1')
 			++current_vertex_degree[1];
@@ -59,13 +63,7 @@ int main(void) {
 		if (c == '\n') {
 			vertex_degree[current_vertex_count] = current_vertex_degree;
 			++current_vertex_count;
-
-			current_vertex_degree = (size_t *) malloc(2 * sizeof(size_t));
-			if (current_vertex_degree == NULL) {
-				printf("Allocation error.\n");
-				return 1;
-			}
-			current_vertex_degree[0] = current_vertex_count + 1;
+			flag = 1;
 		}
 
 		if (current_vertex_count >= max_vertex_count) {
@@ -81,16 +79,11 @@ int main(void) {
 		}
 	}
 
-	old_vertex_degree = vertex_degree;
-	vertex_degree = (size_t **) realloc(vertex_degree, current_vertex_count * sizeof(size_t));
-	if (vertex_degree == NULL)
-		vertex_degree = old_vertex_degree;
-
 	bubble_sort(vertex_degree, current_vertex_count);
 	print_even_vertex_degree(vertex_degree, current_vertex_count);
 
 	fclose(file_with_matrix);
-	for (size_t i = 0; i < current_vertex_count; ++i)
+	for (size_t i = 0; i < max_vertex_count; ++i)
 		free(vertex_degree[i]);
 	free(vertex_degree);
 
