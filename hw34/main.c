@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 void swap(size_t **Array, size_t index1, size_t index2) {
 	size_t *tmp = Array[index1];
@@ -27,8 +28,12 @@ int main(void) {
 	size_t *current_vertex_degree = NULL;
 	size_t max_vertex_count = 1;
 	size_t current_vertex_count = 0;
-	char c;
+	clock_t start_time;
+	clock_t end_time;
 	int flag = 1;
+	char c;
+
+	start_time = clock();
 
    	file_with_matrix = fopen("matrix.txt", "r");
 	if (file_with_matrix == NULL) {
@@ -86,6 +91,9 @@ int main(void) {
 	for (size_t i = 0; i < max_vertex_count; ++i)
 		free(vertex_degree[i]);
 	free(vertex_degree);
+
+	end_time = clock();
+	printf("Program running time: %lf second\n", (double) (end_time - start_time) / CLOCKS_PER_SEC);
 
 	return 0;
 }
