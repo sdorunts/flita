@@ -18,11 +18,13 @@ void bubble_sort(size_t **Array, size_t length) {
 void print_even_vertex_degree(size_t **Array, size_t length) {
 	for (size_t i = 0; i < length; ++i)
 		if (Array[i][1] % 2 == 0)
-			printf("%ld\n", Array[i][0]);
+			continue;
+			// printf("%ld\n", Array[i][0]);
 }
 
 int main(void) {
 	FILE * file_with_matrix = NULL;
+	FILE * file_with_running_time = NULL;
 	size_t **vertex_degree = NULL;
 	size_t **old_vertex_degree = NULL;
 	size_t *current_vertex_degree = NULL;
@@ -93,7 +95,15 @@ int main(void) {
 	free(vertex_degree);
 
 	end_time = clock();
-	printf("Program running time: %lf second\n", (double) (end_time - start_time) / CLOCKS_PER_SEC);
+
+	file_with_running_time = fopen("running_time.txt", "a");
+	if (file_with_running_time == NULL) {
+		printf("Can't open file for writing.\n");
+		return 1;
+	}
+
+	fprintf(file_with_running_time, "%lf\n", (double) (end_time - start_time) / CLOCKS_PER_SEC);
+	fclose(file_with_running_time);
 
 	return 0;
 }
