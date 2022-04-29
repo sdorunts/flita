@@ -2,10 +2,19 @@
 
 from random import randint
 import numpy as np
+import argparse
 
-# Считывание из консоли данных, по которым будет происходить генерация
-N = int(input("Введите количество вершин: ")) 
-M = int(input("Введите общее количество связей: "))
+# Настройка аргументов командной строки
+parser = argparse.ArgumentParser()
+parser.add_argument("--count_of_vertex", required=True, type=int)
+parser.add_argument("--count_of_all_degree", required=True, type=int)
+
+args = parser.parse_args()
+
+# Считывание из данных, по которым будет происходить генерация,
+# как аргументов командной строки
+N = args.count_of_vertex 
+M = args.count_of_all_degree
 
 # Создание матрицы N x M, где по строкам будут записаны
 # каждый столбец конечной матрицы. Т.е. matrix - 
